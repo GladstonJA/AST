@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ListarAcoes">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListarAcoesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarAcoesResult" type="tns:ArrayOfStock" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfStock">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Stock" nillable="true" type="tns:Stock" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Stock">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AtualizarAcao">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stock" type="tns:Stock" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AtualizarAcaoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AtualizarAcaoResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ListarAcoesSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarAcoes" />
+  </wsdl:message>
+  <wsdl:message name="ListarAcoesSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarAcoesResponse" />
+  </wsdl:message>
+  <wsdl:message name="AtualizarAcaoSoapIn">
+    <wsdl:part name="parameters" element="tns:AtualizarAcao" />
+  </wsdl:message>
+  <wsdl:message name="AtualizarAcaoSoapOut">
+    <wsdl:part name="parameters" element="tns:AtualizarAcaoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WebService1Soap">
+    <wsdl:operation name="ListarAcoes">
+      <wsdl:input message="tns:ListarAcoesSoapIn" />
+      <wsdl:output message="tns:ListarAcoesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AtualizarAcao">
+      <wsdl:input message="tns:AtualizarAcaoSoapIn" />
+      <wsdl:output message="tns:AtualizarAcaoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebService1Soap" type="tns:WebService1Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ListarAcoes">
+      <soap:operation soapAction="http://tempuri.org/ListarAcoes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AtualizarAcao">
+      <soap:operation soapAction="http://tempuri.org/AtualizarAcao" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebService1Soap12" type="tns:WebService1Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ListarAcoes">
+      <soap12:operation soapAction="http://tempuri.org/ListarAcoes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AtualizarAcao">
+      <soap12:operation soapAction="http://tempuri.org/AtualizarAcao" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebService1">
+    <wsdl:port name="WebService1Soap" binding="tns:WebService1Soap">
+      <soap:address location="http://localhost:24140/StockQuoteWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebService1Soap12" binding="tns:WebService1Soap12">
+      <soap12:address location="http://localhost:24140/StockQuoteWS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
